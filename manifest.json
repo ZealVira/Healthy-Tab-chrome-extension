@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "HealthyTab",
+  "description": "Gives health tips on every new tab!",
+  "version": "1.0",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "action": {
+    "default_title": "Stay Healthy!"
+  },
+  "permissions": ["storage", "alarms"]
+  
+
+}

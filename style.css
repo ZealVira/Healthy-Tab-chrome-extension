@@ -1,0 +1,117 @@
+body {
+  margin: 0;
+  background-color: #f0fdf4;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.animation {
+  width: 450px;
+  height: 450px;
+}
+
+.tip {
+  font-size: 24px;
+  color: #1e3a8a;
+  margin-top: 20px;
+  transition: opacity 1s ease;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 250px;
+    position: absolute;
+    top: 20px;       /* Distance from the top edge */
+    left: 20px;      /* Distance from the left edge */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.glasses {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+.glass {
+    width: 40px;
+    margin: 5px;
+    cursor: pointer;
+    background: white;
+}
+
+.glass.filled {
+    background: #00bcd4;
+}
+
+#reset-btn {
+    padding: 10px 20px;
+    background: #00bcd4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#goal-input {
+    margin: 10px 0;
+}
+
+#goal-value {
+    font-weight: bold;
+    color: #0077cc;
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.set-goal-btn {
+    background-color: #0077cc;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.set-goal-btn:hover {
+    background-color: #005fa3;
+}
+
+.progress-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 15px;
+    margin: 20px 0;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right,  #ff9472, #f2709c);
+    /* background: linear-gradient(to right, #a1ffce, #faffd1); */
+    /* background: linear-gradient(to right, #00c6ff, #0072ff); */
+    transition: width 0.5s ease-in-out;
+    border-radius: 20px;
+}
+
+.progress-percentage {
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    margin-top: 5px;
+}

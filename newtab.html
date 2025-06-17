@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HealthTab</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="lottie.min.js"></script>  <!-- ✅ local file -->
+</head>
+    
+<body>
+  <!-- <h2>  Turning every new tab into a step towards a healthier you! </h2> -->
+  
+  <!-- <div id="animation" class="animation"></div> -->
+  <div id="tip" class="tip">Health Tip Loading...</div> 
+
+    <div class="container">
+      <h2>💧 Water Intake Tracker</h2>
+      <!-- <p id="goal-text">Your Daily Goal: 8 Glasses</p> -->
+      <label for="goal-input">Set your daily goal: </label><span id="goal-value">8</span>  &nbsp;&nbsp; glasses
+      <br>
+      <input type="range" id="goal-input" min="1" max="8" step="1" value="8">
+      <button class="set-goal-btn" id="set-goal-btn">Set Goal</button>
+      <p>Current Intake: <span id="current-intake">0</span> glasses</p>
+
+      <div class="glasses" id="glasses-container">
+          <!-- Will be filled by JS -->
+      </div>
+
+      <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <p id="progress-percentage">0% completed</p>
+
+      <button id="reset-btn">Reset</button>
+    </div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
