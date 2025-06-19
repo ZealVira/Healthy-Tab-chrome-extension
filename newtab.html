@@ -1,52 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>HealthTab</title>
   <link rel="stylesheet" href="style.css">
-  <script src="lottie.min.js"></script>  <!-- ✅ local file -->
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <script src="lottie.min.js"></script> <!-- ✅ local file -->
 </head>
-    
+
 <body>
   <!-- <h2>  Turning every new tab into a step towards a healthier you! </h2> -->
-  
+
   <!-- <div id="animation" class="animation"></div> -->
-  <div id="tip" class="tip">Health Tip Loading...</div> 
+  <div class="tip-container">
+    <div id="tip" class="tip">Health Tip Loading...</div>
+  </div>
 
-    <div class="container">
-      <h2>💧 Water Intake Tracker</h2>
-      <!-- <p id="goal-text">Your Daily Goal: 8 Glasses</p> -->
-      <label for="goal-input">Set your daily goal: </label><span id="goal-value">8</span>  &nbsp;&nbsp; glasses
-      <br>
-      <input type="range" id="goal-input" min="1" max="8" step="1" value="8">
-      <button class="set-goal-btn" id="set-goal-btn">Set Goal</button>
-      <p>Current Intake: <span id="current-intake">0</span> glasses</p>
+  <div class="links">
+    <a href="https://mail.google.com" target="_blank" class="gmail-link">Gmail</a>
+    <a href="https://www.photos.google.com" target="_blank" class="gmail-link">Photos</a>
+    <div id="apps-icon" class="apps-icon">⋮⋮⋮</div>
+    <img id="profile-icon" src="https://www.gravatar.com/avatar?d=identicon" alt="Profile" class="profile-icon">
+  </div>
 
-      <div class="glasses" id="glasses-container">
-          <!-- Will be filled by JS -->
-      </div>
 
-      <div class="progress-container">
-          <div class="progress-bar" id="progress-bar"></div>
-      </div>
-      <p id="progress-percentage">0% completed</p>
-      
-      <button id="reset-btn">Reset</button>
-      <div id="achievement-animation" class="hidden"></div>
+<div id="apps-menu" class="apps-menu hidden">
+  <!-- My Account - Always First -->
+  <div class="app-item">
+    <a href="https://myaccount.google.com/" target="_blank">
+      <img src="https://www.gravatar.com/avatar?d=identicon" alt="Account">
+    </a>
+    <span class="app-name">Account</span>
+  </div>
 
+  <!-- Gmail -->
+  <div class="app-item">
+    <a href="https://mail.google.com" target="_blank">
+      <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail">
+    </a>
+    <span class="app-name">Gmail</span>
+  </div>
+
+  <!-- Drive -->
+  <div class="app-item">
+    <a href="https://drive.google.com" target="_blank">
+      <img src="https://ssl.gstatic.com/images/branding/product/2x/drive_2020q4_48dp.png" alt="Drive">
+    </a>
+    <span class="app-name">Drive</span>
+  </div>
+
+  <!-- Calendar -->
+  <div class="app-item">
+    <a href="https://calendar.google.com" target="_blank">
+      <img src="https://ssl.gstatic.com/calendar/images/dynamiclogo_2020q4/calendar_19_2x.png" alt="Calendar">
+    </a>
+    <span class="app-name">Calendar</span>
+  </div>
+
+  <!-- Maps -->
+  <div class="app-item">
+    <a href="https://maps.google.com" target="_blank">
+      <img src="https://maps.gstatic.com/tactile/basepage/pegman_sherlock.png" alt="Maps">
+    </a>
+    <span class="app-name">Maps</span>
+  </div>
+
+  <!-- Photos -->
+  <div class="app-item">
+    <a href="https://photos.google.com" target="_blank">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAABUUlEQVR4AWJwL/ChKyZb4ytn0wtAvBeIy6ZNSQX0Vg+gFUZRHMDnNMXZtm1kj3nZnNLsbGs2c83KGrO2MNu6+07tDGfbe+fW7Vb/9z7/rq+zDlCQ1OoGEdUKivtg9wCt4Flu2KBu8FwKfNu18ntZtO55nrM5MyKM3BqZuW7ySeGAEDZofLgekP8CBVFVQ8Bq/sUIaqaG82ZBmLgcDAPN/h9Im54Ga9fFxbCWh6kpciOUgFtS4JrFHoIUUwaKRYsfuYp2BeQcIJzsXJAV776KkIjhkjG7wfJ9h5HC15iuV4HJb79l5GadDQKUOFwsMAmjBaKg5e2YBfFBghEwv+1+XBJsMQsaH89EhKag6SFWBsQ9k107GrjPr+VNFWvQUISCPPSmAZ5TBkKgeWFQfENuoSBwHe4rB/nh96EeECa7ThCbtU0riKhWEPfMD3gTogDUk3ckBtM8fFGLwQAAAABJRU5ErkJggg==" alt="Photos">
+    </a>
+    <span class="app-name">Photos</span>
+  </div>
+
+  <!-- Add more apps to simulate scrolling -->
+  <div class="app-item">
+    <a href="https://news.google.com" target="_blank">
+      <img src="https://ssl.gstatic.com/images/branding/product/1x/news_48dp.png" alt="News">
+    </a>
+    <span class="app-name">News</span>
+  </div>
+
+  <div class="app-item">
+    <a href="https://contacts.google.com" target="_blank">
+      <img src="https://ssl.gstatic.com/images/branding/product/1x/contacts_48dp.png" alt="Contacts">
+    </a>
+    <span class="app-name">Contacts</span>
+  </div>
+
+  <div class="app-item">
+    <a href="https://meet.google.com" target="_blank">
+      <img src="https://ssl.gstatic.com/images/branding/product/1x/meet_48dp.png" alt="Meet">
+    </a>
+    <span class="app-name">Meet</span>
+  </div>
+
+  <!-- Additional Apps - Scrollable -->
+  <div class="app-item">
+    <a href="https://keep.google.com" target="_blank">
+      <img src="https://ssl.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png" alt="Keep">
+    </a>
+    <span class="app-name">Keep</span>
+  </div>
+
+  <div class="app-item">
+    <a href="https://translate.google.com" target="_blank">
+      <img src="https://ssl.gstatic.com/images/branding/product/1x/translate_48dp.png" alt="Translate">
+    </a>
+    <span class="app-name">Translate</span>
+  </div>
+
+  <div class="app-item">
+    <a href="https://play.google.com" target="_blank">
+      <img src="https://ssl.gstatic.com/images/branding/product/1x/play_prism_48dp.png" alt="Play Store">
+    </a>
+    <span class="app-name">Play</span>
+  </div>
+</div>
+
+
+  <div class="time"></div>
+  <div class="container">
+    <h2>💧 Water Intake Tracker</h2>
+    <!-- <p id="goal-text">Your Daily Goal: 8 Glasses</p> -->
+    
+    <label for="goal-input">Set your daily goal: </label><span id="goal-value">8</span> &nbsp;&nbsp; glasses
+    <br>
+    <input type="range" id="goal-input" min="1" max="8" step="1" value="8">
+    <button class="set-goal-btn" id="set-goal-btn">Set Goal</button>
+    <p>Current Intake: <span id="current-intake">0</span> glasses</p>
+
+    <div class="glasses" id="glasses-container">
+      <!-- Will be filled by JS -->
     </div>
 
-    <!-- <div class="history-container">
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <p id="progress-percentage">0% completed</p>
+
+    <button id="reset-btn">Reset</button>
+    <div id="achievement-animation" class="hidden"></div>
+
+  </div>
+
+  <!-- <div class="history-container">
         <h1>Water Intake History</h1>
         <div id="timeline"></div>
     </div> -->
 
-    <div class="history-container">
-        <h2>Water Intake History</h2>
-        <div id="calendar">
-          
-        </div>
+  <!-- Chrome-like center search area -->
+  <div class="chrome-search-section">
+    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google Logo"
+      class="google-logo">
+    <br>
+    <div class="search-bar">
+      <i class="fal fa-search"></i>
+      <input type="text" id="chrome-search" placeholder="Search Google or type a URL">
     </div>
+  </div>
+
+  <div class="history-container">
+    <h2>Water Intake History</h2>
+    <div id="calendar">
+
+    </div>
+  </div>
   <script src="script.js"></script>
 </body>
+
 </html>

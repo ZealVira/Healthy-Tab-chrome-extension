@@ -521,7 +521,7 @@ function renderGlasses() {
                 filledGlasses++;
                 lastFillTime = now;
                 currentIntake.textContent = filledGlasses;
-
+                
                 chrome.storage.local.get(['dailyHistory', 'dailyGoal'], (result) => {
                     const history = result.dailyHistory || {};
                     const today = new Date().toISOString().split('T')[0]; // Correct Date Format
@@ -831,6 +831,41 @@ function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString(undefined, options);
 }
 
+
+// open apps menu
+const appsIcon = document.getElementById('apps-icon');
+const appsMenu = document.getElementById('apps-menu');
+
+appsIcon.addEventListener('click', () => {
+  appsMenu.classList.toggle('show');
+});
+
+// Close the menu if clicked outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#apps-menu') && !e.target.closest('#apps-icon')) {
+    appsMenu.classList.remove('show');
+  }
+});
+
+
+// Handle Chrome search input
+document.getElementById('chrome-search').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        const query = e.target.value.trim();
+        if (query.startsWith('http://') || query.startsWith('https://')) {
+            window.open(query, '_blank');
+        } else {
+            const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            window.open(googleSearchUrl, '_blank');
+        }
+    }
+});
+
+
+
+// ========================
+// initial load features
+// ========================
 let achievementAnim;
 
 document.addEventListener('DOMContentLoaded', () => {
