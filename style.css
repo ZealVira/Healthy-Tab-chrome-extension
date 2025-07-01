@@ -440,6 +440,9 @@ h1 {
 
 .Streak p{
   font-family:  'Montserrat';
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 1px;
 }
 /* -------ui(calandaer icon )------- */
 #calendar-icon {

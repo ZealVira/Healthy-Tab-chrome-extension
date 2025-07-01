@@ -89,7 +89,7 @@ function renderGlasses() {
                 //time.innerHTML = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                 chrome.storage.local.get(['dailyHistory', 'dailyGoal'], (result) => {
                     const history = result.dailyHistory || {};
-                    const today = new Date().toISOString().split('T')[0]; // Correct Date Format
+                    const today = getLocalDateString();
                     const percentage = Math.round((filledGlasses / totalGlasses) * 100); // Correct Calculation
 
                     history[today] = percentage; // Store percentage correctly
@@ -101,13 +101,14 @@ function renderGlasses() {
                     }, () => {
                         updateProgressBar();
                         loadFullMonthCalendar(); // Live update the calendar
+                        loadStreakData();
 
                         // 🎉 Trigger achievement animation if goal is met
                         if (filledGlasses >= totalGlasses) {
                             showAchievementAnimation();
 
                             //update the streak counter
-                            const todayStr = new Date().toISOString().split('T')[0];
+                            const todayStr = getLocalDateString();
                             if(lastStreakDate !== todayStr){
                                 const yesterdayStr = new Date(Date.now() - 86400000).toISOString().split('T')[0];
 
@@ -336,6 +337,14 @@ function loadFullMonthCalendar() {
 function formatDate(dateString) {
     const options = { month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
+}
+
+
+function getLocalDateString() {
+  const today = new Date();
+  const offset = today.getTimezoneOffset(); // in minutes
+  const localDate = new Date(today.getTime() - offset * 60 * 1000);
+  return localDate.toISOString().split('T')[0];
 }
 
 
