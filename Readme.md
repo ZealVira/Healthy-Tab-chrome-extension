@@ -43,7 +43,7 @@ With features like **water intake tracking**, **mood logging**, **health quotes*
 
 2. **Open Chrome** and navigate to:
 ```bash
-chrome://extensions/
+   chrome://extensions/
 
 3. Enable **Developer Mode** (top-right toggle)
 
