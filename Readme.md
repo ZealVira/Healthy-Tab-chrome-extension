@@ -42,8 +42,8 @@ With features like **water intake tracking**, **mood logging**, **health quotes*
    git clone https://github.com/ZealVira/Healthy-Tab-chrome-extension.git
 
 2. **Open Chrome** and navigate to:
-```bash
-chrome://extensions/
+   ```bash
+   chrome://extensions/
 
 3. Enable **Developer Mode** (top-right toggle)
 
