@@ -3,6 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" 
+      content="connect-src https://get-quotes-api.p.rapidapi.com;">
+
   <title>HealthTab</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
@@ -11,14 +14,39 @@
 </head>
 
 <body>
-  <!-- <h2>  Turning every new tab into a step towards a healthier you! </h2> -->
-
-  <!-- <div id="animation" class="animation"></div> -->
   <div class="tip-container">
-    <div id="tip" class="tip">Health Tip Loading...</div>
+    <div id="tip" class="tip">Click on calender to log in your mood and get a quote...</div>
   </div>
 
   <div class="links">
+    <figure id="calendar-icon">
+      <header id="day-name">Monday</header>
+      <section id="day-number">17</section>
+    </figure>
+
+    <!-- Modal Calendar -->
+    <div id="calendar-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-btn" id="close-calendar">&times;</span>
+        <div class="history-container">
+          <h2>Water Intake History</h2>
+          <div id="calendar"></div>
+          <div id="mood-options">
+            <p style=" color: #4285f4;">Log your mood</p>
+            <button class="mood-btn" data-mood="happy">😄</button>
+            <button class="mood-btn" data-mood="neutral">😐</button>
+            <button class="mood-btn" data-mood="sad">😞</button>
+            <button class="mood-btn" data-mood="angry">😡</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="Streak" >
+      <span style="font-size: 24px;">🔥</span>
+      <p style="font-size: 15px;margin-top: 1px;" id="counter" > 5 days </p>
+    </div>
     <a href="https://mail.google.com" target="_blank" class="gmail-link">Gmail</a>
     <a href="https://www.photos.google.com" target="_blank" class="gmail-link">Photos</a>
     <div id="apps-icon" class="apps-icon">⋮⋮⋮</div>
@@ -146,28 +174,40 @@
 
   </div>
 
-  <!-- <div class="history-container">
-        <h1>Water Intake History</h1>
-        <div id="timeline"></div>
-    </div> -->
-
   <!-- Chrome-like center search area -->
   <div class="chrome-search-section">
-    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google Logo"
+    <img src="https://white.logodownload.org/wp-content/uploads/2020/11/google-white-logo.png" alt="Google Logo"
       class="google-logo">
     <br>
-    <div class="search-bar">
-      <i class="fal fa-search"></i>
-      <input type="text" id="chrome-search" placeholder="Search Google or type a URL">
+    <div class="chrome-search">
+      <div class="search-bar">
+        <i class="fal fa-search"></i>
+        <input type="text" id="chrome-search" placeholder="Search Google or type a URL">
+      </div>
+      
+      <button id="toggle-time-settings" title="Set Screen Time">⏱</button>
     </div>
   </div>
 
-  <div class="history-container">
-    <h2>Water Intake History</h2>
-    <div id="calendar">
+  <div id="time-settings-panel">
+    <h3>Set Screen Time</h3>
+    <p>Minutes:</p>
+    <input type="number" id="timeLimit" min="1" value="5" />
+    <button id="saveLimit">Save</button>
+    <p id="status"></p>
+  </div>
+    
+  <!-- prompt -->
 
+  <div id="screenTimeModal" class="modal-overlay">
+    <div class="time-modal-content">
+      <h2>⏳ Time's Up!</h2>
+      <p>You've exceeded your screen time limit.<br>Take a short break for your well-being. 💧🌿</p>
+      <button id="closeModalBtn">Got it!</button>
     </div>
   </div>
+
+  <script src="quotes.js"></script>
   <script src="script.js"></script>
 </body>
 

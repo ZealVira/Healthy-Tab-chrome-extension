@@ -1,131 +1,14 @@
-/* body {
-  margin: 0;
-  background-color: #f0fdf4;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.animation {
-  width: 450px;
-  height: 450px;
-}
-
-.tip {
-  font-size: 24px;
-  color: #1e3a8a;
-  margin-top: 20px;
-  transition: opacity 1s ease;
-}
-
-.hidden {
-  opacity: 0;
-}
-
-.container {
-    text-align: center;
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 250px;
-    position: absolute;
-    top: 20px;      
-    left: 20px;      
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.glasses {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 10px 0;
-}
-
-.glass {
-    width: 40px;
-    margin: 5px;
-    cursor: pointer;
-    background: white;
-}
-
-.glass.filled {
-    background: #00bcd4;
-}
-
-#reset-btn {
-    padding: 10px 20px;
-    background: #00bcd4;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#goal-input {
-    margin: 10px 0;
-}
-
-#goal-value {
-    font-weight: bold;
-    color: #0077cc;
-    margin-left: 10px;
-    font-size: 18px;
-}
-
-.set-goal-btn {
-    background-color: #0077cc;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-left: 15px;
-}
-
-.set-goal-btn:hover {
-    background-color: #005fa3;
-}
-
-.progress-container {
-    width: 100%;
-    background-color: #e0e0e0;
-    border-radius: 20px;
-    overflow: hidden;
-    height: 15px;
-    margin: 20px 0;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(to right,  #ff9472, #f2709c);
-    /* background: linear-gradient(to right, #a1ffce, #faffd1); */
-    /* background: linear-gradient(to right, #00c6ff, #0072ff); */
-    /* transition: width 0.5s ease-in-out;
-    border-radius: 20px;
-}
-
-.progress-percentage {
-    text-align: center;
-    font-weight: bold;
-    color: #333;
-    margin-top: 5px;
-} */
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
     margin: 0;
     /* background: linear-gradient(135deg, #dfffe2, #f0fdf4); */
-    background-image: url('bg.jpg');
+    background-image: url('young-character-nature.jpg');
     background-size: cover;
     background-position:bottom;
     background-repeat: no-repeat;
     z-index: -1;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Montserrat', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -142,7 +25,7 @@ body {
     color: #fcfdff;
     transition: opacity 1s ease;
     position: relative;
-    bottom: -5px;
+    top: -15px;
     text-align: center;
 }
 
@@ -160,7 +43,6 @@ body {
     border-radius: 20px;
 }
 
-
 .hidden {
     opacity: 0;
 }
@@ -170,7 +52,7 @@ body {
     background: #0000008c;
     color: white;
     font-size: medium;
-    padding: 25px;
+    padding: 20px;
     border-radius: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     width: 280px;
@@ -178,6 +60,7 @@ body {
     top: 20px;
     left: 20px;
     transition: all 0.3s ease-in-out;
+    height: auto;
 }
 
 .glasses {
@@ -204,7 +87,7 @@ body {
 
 #reset-btn {
     padding: 10px 20px;
-    background: linear-gradient(to right, #00c6ff, #0072ff);
+    background: #C0AC54;
     color: white;
     border: none;
     border-radius: 8px;
@@ -231,7 +114,7 @@ body {
 }
 
 .set-goal-btn {
-    background: linear-gradient(to right, #00c6ff, #0072ff);
+    background: #C0AC54;
     color: white;
     padding: 10px 18px;
     border: none;
@@ -276,25 +159,87 @@ body {
 
 
 /*----------------Calendar css-----------------*/
-.history-container {
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 50%;
+  max-width: 330px;
+  height: 400px;
+  position: relative;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.calendar-modal{
+  text-align: center;
     background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    color: black;
+    font-size: medium;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     width: 300px;
-    position: absolute;
-    bottom: 90px;
+    position: fixed;
+    justify-content: center;
+    bottom: 20px;
     right: 20px;
     transition: all 0.3s ease-in-out;
+    height:auto;
+    display :flex;
+    flex-direction: column;
+    gap :-5px;
+    
+} 
+.history-container{
+    align-items:center;
+    font-family:Special Elite;
+    font-size:20px;
+    text-align:center;
 }
 
 .history-container h2 {
     font-size: 24px;
     color: #1e3a8a;
     margin-bottom: 20px;
+    font-family:Special Elite;
+    text-align:center;
 }
 
 h1 {
+    align-items: center;
     text-align: center;
     color: #1e3a8a;
     margin-bottom: 30px;
@@ -328,6 +273,8 @@ h1 {
 }
 
 
+
+
 /*--------------Animation Achievement-----------------*/
 #achievement-animation {
     position: fixed;
@@ -353,7 +300,7 @@ h1 {
 }
 
 .google-logo {
-  width: 180px;
+  width: 200px;
   margin-bottom: 20px;
 }
 
@@ -386,7 +333,7 @@ h1 {
   position: relative;
   bottom: -7px;
   font-size: 21px;
-  color: #f9fafc;
+  color: black;
   text-decoration: none;
   font-weight: 500;
 }
@@ -463,9 +410,282 @@ h1 {
 
 .app-name {
   font-size: medium;
+  display: block;
   color: #202124;
 }
 
 .app-item:hover {
   background-color: #f1f3f4;
+}
+
+
+/* -------mood buttons------- */
+.mood-btn {
+  font-size: 1.8rem;
+  background: transparent;
+  border: none;
+  margin: 0 0.3rem;
+  cursor: pointer;
+}
+.mood-options {
+  margin-top: 2px;
+  gap: -5px;
+}
+.mood-options p{
+  text-align: center;
+  font-size: 20px;
+  justify-content: center;
+  font-family:  'Montserrat', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.Streak p{
+  font-family:  'Montserrat';
+}
+/* -------ui(calandaer icon )------- */
+#calendar-icon {
+  width: 180px;
+    height: 150px;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    position: absolute;
+    gap: -5px;
+    right: -35px;
+    margin-top: auto;
+    top: 65px;
+}
+
+#calendar-icon header {
+  background: #e74c3c;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  padding: 4px 0;
+}
+
+#calendar-icon section {
+  font-size: 70px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 3px;
+  justify-content: center;
+}
+
+
+/* **********OMMMMMMMM*************** */
+.container input[type="number"],
+.container button {
+  padding: 10px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(4px);
+  outline: none;
+  transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+.container input[type="number"]:focus {
+  border-color: #00bfa6;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.container button {
+  background: #C0AC54;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 8px;
+  color: white;
+}
+
+.container button:hover {
+  background-color: rgba(0, 158, 143, 0.85);
+  transform: scale(1.03);
+}
+
+#toggle-time-settings {
+  position: absolute;
+  top: 80.5%;
+  left: calc(50% + 295px);
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0, 191, 166, 0.6);
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 1001;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#toggle-time-settings::before {
+  content: "";
+  font-size: 20px;
+  margin-right: 2px;
+}
+
+#toggle-time-settings:hover {
+  background: rgba(0, 158, 143, 0.8);
+}
+
+#time-settings-panel {
+  position: absolute;
+  top: calc(70% + 35px);
+  left: calc(40% + 270px);
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+  width: 240px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  
+  /* NEW: Smooth visibility */
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#time-settings-panel.show {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+
+#time-settings-panel.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+
+#time-settings-panel input,
+#time-settings-panel button {
+  padding: 8px;
+  font-size: 1rem;
+  margin-top: 6px;
+  width: 100%;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+#time-settings-panel button {
+  background-color: rgba(0, 191, 166, 0.7);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#time-settings-panel button:hover {
+  background-color: rgba(0, 158, 143, 0.85);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* prompt */
+
+/* Base modal overlay with blur */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Modal box styling */
+.time-modal-content {
+  background: linear-gradient(145deg, #ffffff, #f4f4f4);
+  color: #222;
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  transform: scale(0.95);
+  opacity: 0;
+  animation: fadeInModal 0.4s ease forwards;
+}
+
+/* Heading & body text */
+.time-modal-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: #00bfa6;
+  font-weight: 600;
+}
+
+.time-modal-content p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Button style */
+.time-modal-content button {
+  background-color: #00bfa6;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.time-modal-content button:hover {
+  background-color: #009e8f;
+  transform: scale(1.05);
+}
+
+/* Fade and scale animation */
+@keyframes fadeInModal {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
