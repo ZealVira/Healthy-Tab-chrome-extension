@@ -513,8 +513,8 @@ h1 {
 
 #toggle-time-settings {
   position: absolute;
-  top: 80.5%;
-  left: calc(50% + 295px);
+  top: 85.5%;
+  left: calc(50% + 270px);
   transform: translateY(-50%);
   width: 48px;
   height: 48px;

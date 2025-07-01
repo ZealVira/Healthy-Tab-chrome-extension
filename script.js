@@ -162,7 +162,7 @@ resetButton.addEventListener('click', () => {
         renderGlasses();
         updateProgressBar();
         loadWaterHistory();
-
+        loadStreakData();
     });
 });
 
@@ -213,7 +213,7 @@ chrome.alarms.create('dailyReset', {
 function getNext11PM() {
     const now = new Date();
     const next = new Date();
-    next.setHours(23, 0, 0, 0);
+    next.setHours(18, 0, 0, 0);
 
     if (now > next) next.setDate(next.getDate() + 1);
     return next.getTime();
@@ -246,7 +246,8 @@ chrome.alarms.onAlarm.addListener((alarm) => {
                 currentIntake.textContent = 0;
                 renderGlasses();
                 updateProgressBar();
-                loadWaterHistory()
+                loadWaterHistory();
+                
             });
         });
     }
@@ -359,10 +360,10 @@ document.getElementById('chrome-search').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         const query = e.target.value.trim();
         if (query.startsWith('http://') || query.startsWith('https://')) {
-            window.open(query, '_blank');
+            window.open(query, '_self');
         } else {
             const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-            window.open(googleSearchUrl, '_blank');
+            window.open(googleSearchUrl, '_self');
         }
     }
 });
@@ -376,6 +377,7 @@ let achievementAnim;
 
 document.addEventListener('DOMContentLoaded', () => {
     loadFullMonthCalendar();
+    loadStreakData();
     achievementAnim = lottie.loadAnimation({
         container: document.getElementById('achievement-animation'),
         renderer: 'svg',
@@ -427,8 +429,7 @@ async function getQuoteForMood(mood) {
     if (Array.isArray(quotesArray) && quotesArray.length > 0) {
       const randomQuote = quotesArray[Math.floor(Math.random() * quotesArray.length)];
       return {
-                quote: randomQuote.quote || randomQuote.text || "No quote text found",
-                author: randomQuote.author || "Unknown"
+                quote: randomQuote.quote || randomQuote.text || "No quote text found"
             };
     }
     return { quote: "Take a deep breath. ❤️", author: "-Anonymous" };
@@ -445,18 +446,17 @@ document.querySelectorAll(".mood-btn").forEach((btn) => {
         const selectedMood = btn.dataset.mood;
 
         document.getElementById("tip").textContent = "Loading Quote....";
-        document.getElementById("author").textContent = "";
+        // document.getElementById("author").textContent = "";
 
-        const { quote, author } = await getQuoteForMood(selectedMood);
+        const { quote } = await getQuoteForMood(selectedMood);
 
         document.getElementById("tip").textContent = `"${quote}"`;
-        document.getElementById("author").textContent = `– ${author}`;
+        // document.getElementById("author").textContent = `– ${author}`;
 
         const moodLog = {
             date: new Date().toISOString(),
             mood: selectedMood,
-            quote: quote,
-            author: author
+            quote: quote
         };
         
         chrome.storage.sync.set({ [Date.now()]: moodLog }, () => {
@@ -469,21 +469,36 @@ document.querySelectorAll(".mood-btn").forEach((btn) => {
 // ========================
 // Streak counter
 // ========================
-let currentStreak = 0;
-let lastStreakDate = null;
+// let currentStreak = 0;
+// let lastStreakDate = null;
 
-chrome.storage.local.get(['streak','lastStreakDate'],(res) => {
-    currentStreak = res.streak || null;
-    lastStreakDate = res.lastStreakDate||null;
-    document.getElementById('counter').textContent=`${currentStreak || 0} days`;;
-});
+// chrome.storage.local.get(['streak','lastStreakDate'],(res) => {
+//     currentStreak = res.streak || null;
+//     lastStreakDate = res.lastStreakDate||null;
+//     document.getElementById('counter').textContent=`${currentStreak || 0} days`;
+// });
+
+function loadStreakData() {
+  chrome.storage.local.get(['streak', 'lastStreakDate'], (res) => {
+    const currentStreak = res.streak || 0;
+    const lastStreakDate = res.lastStreakDate || null;
+
+    const counterEl = document.getElementById('counter');
+    if (counterEl) {
+      counterEl.textContent = `${currentStreak} days`;
+    } else {
+      console.warn("Element with id 'counter' not found.");
+    }
+
+    // Optionally return values if needed later
+    return { currentStreak, lastStreakDate };
+  });
+}
 
 
 // ========================
 // calander icon
 // ========================
-
-
 document.addEventListener('DOMContentLoaded', () => {
   // Set day name and number in icon
   const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -527,100 +542,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// ****************Om**********
-
-document.addEventListener("DOMContentLoaded", () => {
-  const toggleBtn = document.getElementById('toggle-time-settings');
-  const panel = document.getElementById('time-settings-panel');
-  const saveBtn = document.getElementById('saveLimit');
-  const timeInput = document.getElementById('timeLimit');
-  const statusText = document.getElementById('status');
-  const closeBtn = document.getElementById('closeModalBtn');
-  const screenTimeModal = document.getElementById('screenTimeModal');
-
-  let limitMinutes = parseInt(localStorage.getItem('screenTimeLimit')) || 5;
-  let startTime = Date.now();
-
-  // Toggle panel
-  toggleBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    panel.classList.toggle('show');
-  });
-
-  // Hide panel on outside click
-  document.addEventListener('click', (e) => {
-    if (!panel.contains(e.target) && !toggleBtn.contains(e.target)) {
-      panel.classList.remove('show');
-    }
-  });
-
-  // Save new limit
-  saveBtn?.addEventListener('click', () => {
-    const val = parseInt(timeInput.value);
-    if (!isNaN(val) && val > 0) {
-      limitMinutes = val;
-      localStorage.setItem('screenTimeLimit', val);
-      statusText.textContent = `Limit set to ${val} minutes ✅`;
-      panel.classList.remove('show');
-      startTime = Date.now();
-    } else {
-      statusText.textContent = `Please enter a valid number`;
-    }
-  });
-
-  // Show/Hide Modal
-  function showModal() {
-    screenTimeModal.style.display = 'flex';
-  }
-
-  function closeModal() {
-    screenTimeModal.style.display = 'none';
-  }
-
-  closeBtn?.addEventListener('click', closeModal);
-
-  // Time Check
-  setInterval(() => {
-    const now = Date.now();
-    const elapsedMin = (now - startTime) / (1000 * 60);
-    if (elapsedMin >= limitMinutes) {
-      showModal();
-      startTime = Date.now(); // Reset after showing modal
-    }
-  }, 30000);
-
-  // Reset on visibility change
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") {
-      startTime = Date.now();
-    }
-  });
-});
-
-
-  // Handle screen time modal
-  function showModal() {
-    document.getElementById('screenTimeModal').style.display = 'flex';
-  }
-
-  function closeModal() {
-    document.getElementById('screenTimeModal').style.display = 'none';
-  }
-
-  function handleTimeLimitExceeded() {
-    showModal();
-  }
-
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closeModal);
-  }
-
 
 // ========================
 // Screen time
 // ========================
-
-
 document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.getElementById('toggle-time-settings');
   const panel = document.getElementById('time-settings-panel');
